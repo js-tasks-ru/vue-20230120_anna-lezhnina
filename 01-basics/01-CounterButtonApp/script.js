@@ -5,15 +5,15 @@ const App = defineComponent({
 
   data() {
     return {
-      counter: 0
-    }
+      counter: 0,
+    };
   },
 
   methods: {
     incrementCounter() {
       this.counter++;
-    }
-  }
+    },
+  },
 });
 
 const app = createApp(App);
