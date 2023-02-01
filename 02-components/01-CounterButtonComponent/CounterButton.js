@@ -6,9 +6,10 @@ export default defineComponent({
   props: {
     count: {
       type: Number,
+      default: 0,
       required: true
     }
   },
 
-  template: `<button type="button" @click="$emit('update:count', isNaN(count) ? 1 : count + 1)">{{ isNaN(count) ? 0 : count }}</button>`,
+  template: `<button type="button" @click="$emit('update:count', count + 1)">{{ count }}</button>`,
 });
