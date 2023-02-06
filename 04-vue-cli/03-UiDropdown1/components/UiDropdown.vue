@@ -7,10 +7,11 @@
 
     <div v-show="opened" class="dropdown__menu" role="listbox">
       <button v-for="option in options"
+              :key="option.value"
               :class="{'dropdown__item': true, 'dropdown__item_icon': useIcon}"
+              :value="option.value"
               role="option"
               type="button"
-              :value="option.value"
               @click="handleSelect">
         <ui-icon v-if="option.icon" :icon="option.icon" class="dropdown__icon"/>
         {{ option.text }}
@@ -19,7 +20,7 @@
   </div>
 
   <select @change="handleSelect">
-    <option v-for="option in options" :value="option.value"
+    <option v-for="option in options" :key="option.value" :value="option.value"
             :selected="selectedOption && selectedOption.value === option.value">
       {{ option.text }}
     </option>
@@ -55,22 +56,21 @@ export default {
     }
   },
 
-  methods: {
-    toggleOpened: function () {
-      console.log('toggleOpened')
-      this.opened = !this.opened;
-    },
-    handleSelect: function (e) {
-      this.$emit('update:modelValue', e.target.value);
-    }
-  },
-
   computed: {
     useIcon: function () {
       return this.options.some(item => item.icon && item.icon.length)
     },
     selectedOption: function () {
       return this.options.find(item => item.value === this.modelValue)
+    }
+  },
+
+  methods: {
+    toggleOpened: function () {
+      this.opened = !this.opened;
+    },
+    handleSelect: function (e) {
+      this.$emit('update:modelValue', e.target.value);
     }
   },
 };
