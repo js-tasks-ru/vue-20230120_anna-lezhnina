@@ -107,7 +107,9 @@ export default {
     updateDate: function (dir) {
       if (![1, -1].includes(dir)) return;
 
-      this.currentDate = new Date(this.currentDate.setMonth(this.currentDate.getMonth() + dir));
+      this.currentDate.setDate(1);
+      this.currentDate.setMonth(this.currentDate.getMonth() + dir)
+      this.currentDate = new Date(this.currentDate);
     }
   }
 };
