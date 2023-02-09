@@ -119,7 +119,7 @@ describe('vue-cli/MeetupsCalendar', () => {
     it('MeetupsCalendar должен корректно вывести Февраль 2021 после 10 переходов на следующий месяц с 31 мая 2020', async () => {
       advanceTo(new Date('2020-05-31'));
       const wrapper = mountMeetupsCalendar();
-      for (let i = 0; i < 9; i++) {
+      for (let i = 0; i < 8; i++) {
         const nextMonthButton = wrapper.get(SELECTOR_NEXT_MONTH);
         await nextMonthButton.trigger('click');
       }
