@@ -1,5 +1,5 @@
 <template>
-  <div v-if="shown" :class="`toast toast_${type}`">
+  <div :class="`toast toast_${type}`">
     <ui-icon class="toast__icon" :icon="$options.icons[type]" />
     <span>{{ text }}</span>
   </div>
@@ -14,7 +14,7 @@ const icons = {
 };
 
 export default {
-  name: 'TheToast',
+  name: 'ToastItem',
 
   icons,
 
@@ -28,24 +28,6 @@ export default {
     text: {
       type: String,
     },
-    timeout: {
-      type: Number,
-      default: 5000,
-    },
-  },
-
-  data() {
-    return {
-      shown: null,
-    };
-  },
-
-  created() {
-    this.shown = true;
-
-    setTimeout(() => {
-      this.shown = false;
-    }, this.timeout);
   },
 };
 </script>

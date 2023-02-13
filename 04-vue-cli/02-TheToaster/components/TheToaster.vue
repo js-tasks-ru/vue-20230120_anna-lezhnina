@@ -1,39 +1,45 @@
 <template>
   <div class="toasts">
-    <TheToast
-      v-for="(toast, index) in toasts"
-      :key="index"
-      :type="toast.type"
-      :text="toast.text"
-      :timeout="toast.timeout"
-    />
+    <toast-item v-for="(toast, index) in toasts" :key="index" :type="toast.type" :text="toast.text" />
   </div>
 </template>
 
 <script>
 import UiIcon from './UiIcon.vue';
-import TheToast from './TheToast';
+import ToastItem from './Toast';
 
 export default {
   name: 'TheToaster',
 
+  timeout: 5000,
+
   components: {
-    TheToast,
+    ToastItem,
     UiIcon,
   },
 
   data() {
     return {
-      toasts: [],
+      toasts: new Set(),
+      count: 0,
     };
   },
 
   methods: {
     success: function (text) {
-      this.toasts.push({ type: 'success', text: text });
+      this.createToast('success', text);
     },
     error: function (text) {
-      this.toasts.push({ type: 'error', text: text });
+      this.createToast('error', text);
+    },
+    createToast: function (type, text, timeout = this.$options.timeout) {
+      const toast = { type, text, id: this.count };
+      this.toasts.add(toast);
+      this.count++;
+
+      setTimeout(() => {
+        this.toasts.delete(toast);
+      }, timeout);
     },
   },
 };
