@@ -1,6 +1,12 @@
 <template>
   <div class="toasts">
-    <TheToast v-for="(toast, index) in toasts" :key="index" :type="toast.type" :text="toast.text" :timeout="toast.timeout" />
+    <TheToast
+      v-for="(toast, index) in toasts"
+      :key="index"
+      :type="toast.type"
+      :text="toast.text"
+      :timeout="toast.timeout"
+    />
   </div>
 </template>
 
@@ -13,23 +19,23 @@ export default {
 
   components: {
     TheToast,
-    UiIcon
+    UiIcon,
   },
 
   data() {
     return {
-      toasts: []
-    }
+      toasts: [],
+    };
   },
 
   methods: {
     success: function (text) {
-      this.toasts.push({type: 'success', text: text});
+      this.toasts.push({ type: 'success', text: text });
     },
     error: function (text) {
-      this.toasts.push({type: 'error', text: text});
-    }
-  }
+      this.toasts.push({ type: 'error', text: text });
+    },
+  },
 };
 </script>
 

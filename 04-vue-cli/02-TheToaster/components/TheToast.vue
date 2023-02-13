@@ -1,6 +1,6 @@
 <template>
   <div v-if="shown" :class="`toast toast_${type}`">
-    <ui-icon class="toast__icon" :icon="$options.icons[type]"/>
+    <ui-icon class="toast__icon" :icon="$options.icons[type]" />
     <span>{{ text }}</span>
   </div>
 </template>
@@ -18,12 +18,12 @@ export default {
 
   icons,
 
-  components: {UiIcon},
+  components: { UiIcon },
 
   props: {
     type: {
       type: String,
-      default: 'success'
+      default: 'success',
     },
     text: {
       type: String,
@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       shown: null,
-    }
+    };
   },
 
   created() {
@@ -46,7 +46,7 @@ export default {
     setTimeout(() => {
       this.shown = false;
     }, this.timeout);
-  }
+  },
 };
 </script>
 

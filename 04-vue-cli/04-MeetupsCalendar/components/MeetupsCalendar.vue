@@ -2,31 +2,40 @@
   <div class="calendar-view">
     <div class="calendar-view__controls">
       <div class="calendar-view__controls-inner">
-        <button class="calendar-view__control-left"
-                type="button"
-                aria-label="Previous month"
-                @click="updateDate(-1)">
-        </button>
+        <button
+          class="calendar-view__control-left"
+          type="button"
+          aria-label="Previous month"
+          @click="updateDate(-1)"
+        ></button>
         <div class="calendar-view__date">{{ localDate }}</div>
-        <button class="calendar-view__control-right"
-                type="button"
-                aria-label="Next month"
-                @click="updateDate(1)">
-        </button>
+        <button
+          class="calendar-view__control-right"
+          type="button"
+          aria-label="Next month"
+          @click="updateDate(1)"
+        ></button>
       </div>
     </div>
 
     <div class="calendar-view__grid">
-      <div v-for="cell in dateCells"
-           :key="cell.getTime()"
-           :class="{'calendar-view__cell': true, 'calendar-view__cell_inactive': cell.getMonth() !== currentDate.getMonth()}"
-           tabindex="0">
+      <div
+        v-for="cell in dateCells"
+        :key="cell.getTime()"
+        :class="{
+          'calendar-view__cell': true,
+          'calendar-view__cell_inactive': cell.getMonth() !== currentDate.getMonth(),
+        }"
+        tabindex="0"
+      >
         <div class="calendar-view__cell-day">{{ cell.getDate() }}</div>
         <div v-if="meetupsByDate[cell.toDateString()]" class="calendar-view__cell-content">
-          <a v-for="(meetup, index) in meetupsByDate[cell.toDateString()]"
-             :key="index"
-             :href="`/meetups/${meetup.id}`"
-             class="calendar-event">
+          <a
+            v-for="(meetup, index) in meetupsByDate[cell.toDateString()]"
+            :key="index"
+            :href="`/meetups/${meetup.id}`"
+            class="calendar-event"
+          >
             {{ meetup.title }}
           </a>
         </div>
@@ -49,7 +58,7 @@ export default {
   data() {
     return {
       currentDate: new Date(),
-    }
+    };
   },
   computed: {
     localDate: function () {
@@ -82,7 +91,7 @@ export default {
       }
 
       return result;
-    }
+    },
   },
 
   methods: {
@@ -108,10 +117,10 @@ export default {
       if (![1, -1].includes(dir)) return;
 
       this.currentDate.setDate(1);
-      this.currentDate.setMonth(this.currentDate.getMonth() + dir)
+      this.currentDate.setMonth(this.currentDate.getMonth() + dir);
       this.currentDate = new Date(this.currentDate);
-    }
-  }
+    },
+  },
 };
 </script>
 
