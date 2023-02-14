@@ -1,8 +1,8 @@
-import {defineComponent} from '../vendor/vue.esm-browser.js';
+import { defineComponent } from '../vendor/vue.esm-browser.js';
 import UiContainer from './UiContainer.js';
 import UiAlert from './UiAlert.js';
 import MeetupView from '../../06-MeetupView/components/MeetupView';
-import {fetchMeetupById} from '../meetupService.js';
+import { fetchMeetupById } from '../meetupService.js';
 
 export default defineComponent({
   name: 'PageMeetup',
@@ -17,7 +17,7 @@ export default defineComponent({
     meetupId: {
       type: Number,
       required: true,
-    }
+    },
   },
 
   data() {
@@ -25,7 +25,7 @@ export default defineComponent({
       loading: true,
       error: false,
       meetup: undefined,
-    }
+    };
   },
 
   watch: {
@@ -39,12 +39,14 @@ export default defineComponent({
           .then((meetup) => {
             this.error = false;
             this.meetup = meetup;
-          }).catch((e) => {
-          this.error = e.message;
-        }).finally(() => {
-          this.loading = false;
-        });
-      }
+          })
+          .catch((e) => {
+            this.error = e.message;
+          })
+          .finally(() => {
+            this.loading = false;
+          });
+      },
     },
   },
 
