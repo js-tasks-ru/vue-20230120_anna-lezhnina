@@ -1,6 +1,6 @@
 <template>
   <label class="checkbox">
-    <input type="checkbox" class="checkbox__input" v-bind="$attrs" :value="value" v-model="customModel" />
+    <input v-bind="$attrs" v-model="customModel" type="checkbox" class="checkbox__input" :value="value" />
     <span class="checkbox__box"></span>
     <slot />
   </label>
@@ -15,6 +15,10 @@ export default {
   props: {
     modelValue: [Boolean, Array, Set],
     value: String,
+  },
+
+  emits: {
+    'update:modelValue': null,
   },
 
   computed: {
