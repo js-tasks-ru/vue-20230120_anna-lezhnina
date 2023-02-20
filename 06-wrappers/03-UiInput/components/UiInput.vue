@@ -12,12 +12,12 @@
     </div>
 
     <component
+      :is="tag"
       ref="input"
       class="form-control"
-      :is="tag"
-      :class="{ 'form-control_sm': this.small, 'form-control_rounded': this.rounded }"
+      :class="{ 'form-control_sm': small, 'form-control_rounded': rounded }"
       v-bind="$attrs"
-      :value="this.modelValue"
+      :value="modelValue"
       @[triggerEvent]="$emit('update:modelValue', $event.target.value)"
     />
 
