@@ -15,6 +15,8 @@ export default {
 
   components: { UiInput },
 
+  inheritAttrs: false,
+
   props: {
     type: {
       type: String,
@@ -33,7 +35,7 @@ export default {
         return '';
       }
 
-      const utcDate =  moment(this.modelValue).utc();
+      const utcDate = moment(this.modelValue).utc();
 
       switch (this.type) {
         case 'time':
