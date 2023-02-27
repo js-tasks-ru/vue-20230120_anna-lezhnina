@@ -1,17 +1,30 @@
 <template>
-  <UiInput :model-value="value" @input="handleInput" />
+  <UiInput :modelValue="value" v-bind="$attrs" :type="type" @change="onChange">
+    <template v-for="slotName in Object.keys($slots)" #[slotName]>
+      <slot :name="slotName" />
+    </template>
+  </UiInput>
 </template>
 
 <script>
 import UiInput from './UiInput.vue';
+import moment from 'moment';
 
 export default {
   name: 'UiInputDate',
 
   components: { UiInput },
 
+  inheritAttrs: false,
+
   props: {
-    modelValue: Number,
+    type: {
+      type: String,
+      default: 'date',
+    },
+    modelValue: {
+      type: [String, Number],
+    },
   },
 
   emits: ['update:modelValue'],
@@ -21,13 +34,25 @@ export default {
       if (!this.modelValue) {
         return '';
       }
-      return new Date(this.modelValue).toISOString().substring(0, 10);
+
+      const utcDate = moment(this.modelValue).utc();
+
+      switch (this.type) {
+        case 'time':
+          return utcDate.format('HH:mm');
+        case 'datetime-local':
+          return utcDate.format('YYYY-MM-DDTHH:mm');
+        case 'date':
+          return utcDate.format('YYYY-MM-DD');
+        default:
+          return '';
+      }
     },
   },
 
   methods: {
-    handleInput($event) {
-      this.$emit('update:modelValue', $event.target.value === '' ? null : $event.target.valueAsNumber);
+    onChange(e) {
+      this.$emit('update:modelValue', e.target.valueAsNumber);
     },
   },
 };
