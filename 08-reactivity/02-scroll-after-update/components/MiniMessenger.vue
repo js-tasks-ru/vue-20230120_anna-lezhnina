@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import { nextTick } from 'vue';
+
 let lastId = 0;
 
 export default {
@@ -34,6 +36,7 @@ export default {
   methods: {
     handleSendSubmit() {
       this.send();
+      this.scrollToBottom();
     },
 
     send() {
@@ -42,6 +45,11 @@ export default {
         text: this.newMessage,
       });
       this.newMessage = '';
+    },
+
+    async scrollToBottom() {
+      await nextTick();
+      this.$refs.items[this.$refs.items.length - 1].scrollIntoView();
     },
   },
 };
