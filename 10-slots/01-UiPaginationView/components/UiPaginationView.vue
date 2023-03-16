@@ -1,7 +1,7 @@
 <template>
   <div class="pagination-container">
     <template v-for="item in pageItems" :key="item.id">
-      <slot :item="item"/>
+      <slot :item="item" />
     </template>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
-  <slot v-if="state === $options.states.FULFILLED" name="fulfilled" :result="result"/>
-  <slot v-else-if="state === $options.states.REJECTED" name="rejected" :error="error"/>
-  <slot v-else name="pending"/>
+  <slot v-if="state === $options.states.FULFILLED" name="fulfilled" :result="result" />
+  <slot v-else-if="state === $options.states.REJECTED" name="rejected" :error="error" />
+  <slot v-else name="pending" />
 </template>
 
 <script>
@@ -28,7 +28,7 @@ export default {
       state: states.PENDING,
       error: undefined,
       result: undefined,
-    }
+    };
   },
 
   watch: {
@@ -49,6 +49,6 @@ export default {
           });
       },
     },
-  }
+  },
 };
 </script>

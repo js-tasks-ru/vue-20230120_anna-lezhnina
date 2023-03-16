@@ -33,6 +33,6 @@ export default {
 
   render() {
     return h(this.component, { bindings: this.bindings });
-  }
+  },
 };
 </script>
