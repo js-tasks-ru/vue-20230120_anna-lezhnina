@@ -10,5 +10,30 @@ export function useProgress() {
 }
 
 export function createProgress({ container, router } = {}) {
-  // Решение
+  const addDefaultContainer = () => document.body.appendChild(document.createElement('div'));
+  const progressInstance = createApp(TheTopProgressBar).mount(container ?? addDefaultContainer());
+
+  if (router) {
+    router.beforeEach(progressInstance.start);
+
+    router.afterEach(progressInstance.finish);
+
+    router.onError((e) => {
+      progressInstance.fail();
+      throw e;
+    });
+  }
+
+  const progress = {
+    start: progressInstance.start,
+    finish: progressInstance.finish,
+    fail: progressInstance.fail,
+
+    /** @implements {import('@vue/runtime-core').PluginInstallFunction} */
+    install(app) {
+      app.provide(PROGRESS_KEY, progress);
+    },
+  };
+
+  return progress;
 }
