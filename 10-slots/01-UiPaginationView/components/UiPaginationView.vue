@@ -2,7 +2,7 @@
   <div class="pagination-container">
     <!-- Получается, что у элементов нет никакого уникального свойства (о котором мы точно знаем),
     которое можно было бы использовать как ключ. -->
-    <slot v-for="(item, index) in pageItems" :item="item" :key="index"/>
+    <slot v-for="(item, index) in pageItems" :key="index" :item="item" />
   </div>
 </template>
 
