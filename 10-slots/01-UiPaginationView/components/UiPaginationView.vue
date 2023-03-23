@@ -1,8 +1,6 @@
 <template>
   <div class="pagination-container">
-    <!-- Получается, что у элементов нет никакого уникального свойства (о котором мы точно знаем),
-    которое можно было бы использовать как ключ. -->
-    <slot v-for="(item, index) in pageItems" :key="index" :item="item" />
+    <slot v-for="item in pageItems" :item="item" />
   </div>
 </template>
 
